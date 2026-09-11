@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CropDoctor AI - Smart Irrigation</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+body{
+    background:#f4fbf4;
+    font-family:Arial,sans-serif;
+}
+
+.sidebar{
+    min-height:100vh;
+    background:#198754;
+    color:white;
+}
+
+.sidebar a{
+    color:white;
+    text-decoration:none;
+    display:block;
+    padding:15px;
+}
+
+.sidebar a:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.card{
+    border:none;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+h2{
+    color:#198754;
+}
+
+.result-box{
+    display:none;
+}
+
+.form-label{
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid">
+<div class="row">
+
+<!-- Sidebar -->
+<div class="col-lg-2 sidebar p-0">
+
+<h3 class="p-3">🌱 CropDoctor AI</h3>
+
+<a href="home.html"><i class="bi bi-house"></i> Home</a>
+<a href="dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a>
+<a href="disease.html"><i class="bi bi-bug"></i> Disease Detection</a>
+<a href="irrigation.html"><i class="bi bi-droplet"></i> Smart Irrigation</a>
+<a href="weather.html"><i class="bi bi-cloud-sun"></i> Weather</a>
+<a href="market.html"><i class="bi bi-graph-up"></i> Market Prices</a>
+<a href="chatbot.html"><i class="bi bi-robot"></i> AI Chatbot</a>
+<a href="contact.html"><i class="bi bi-envelope"></i> Contact</a>
+
+</div>
+
+<!-- Main Content -->
+<div class="col-lg-10 p-4">
+
+<div class="card p-4">
+
+<h2 class="mb-3">
+<i class="bi bi-droplet-fill"></i>
+Smart Irrigation Recommendation
+</h2>
+
+<p>
+Enter your farm details to receive an AI-based irrigation recommendation.
+</p>
+
+<hr>
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+<label class="form-label">Crop Name</label>
+<input type="text" class="form-control" id="crop" placeholder="e.g. Rice">
+</div>
+
+<div class="col-md-6 mb-3">
+<label class="form-label">Soil Type</label>
+<select class="form-select" id="soil">
+<option>Select Soil Type</option>
+<option>Clay</option>
+<option>Sandy</option>
+<option>Loamy</option>
+<option>Black Soil</option>
+<option>Red Soil</option>
+</select>
+</div>
+
+<div class="col-md-6 mb-3">
+<label class="form-label">Temperature (°C)</label>
+<input type="number" class="form-control" id="temperature" placeholder="30">
+</div>
+
+<div class="col-md-6 mb-3">
+<label class="form-label">Humidity (%)</label>
+<input type="number" class="form-control" id="humidity" placeholder="70">
+</div>
+
+<div class="col-md-6 mb-3">
+<label class="form-label">Soil Moisture (%)</label>
+<input type="number" class="form-control" id="moisture" placeholder="45">
+</div>
+
+<div class="col-md-6 mb-3">
+<label class="form-label">Rainfall (mm)</label>
+<input type="number" class="form-control" id="rainfall" placeholder="20">
+</div>
+
+</div>
+
+<div class="text-center mt-3">
+
+<button class="btn btn-success btn-lg" id="recommendBtn">
+
+<i class="bi bi-droplet-half"></i>
+
+Get Recommendation
+
+</button>
+
+</div>
+
+<div class="card bg-light mt-4 p-4 result-box" id="resultBox">
+
+<h4 class="text-success">AI Recommendation</h4>
+
+<p><strong>Water Required:</strong>
+<span id="waterAmount">--</span>
+</p>
+
+<p><strong>Recommendation:</strong></p>
+
+<p id="recommendation">
+Fill the form and click the button.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+<script>
+
+document.getElementById("recommendBtn").addEventListener("click",function(){
+
+let crop=document.getElementById("crop").value;
+let soil=document.getElementById("soil").value;
+let temp=document.getElementById("temperature").value;
+let humidity=document.getElementById("humidity").value;
+let moisture=document.getElementById("moisture").value;
+let rainfall=document.getElementById("rainfall").value;
+
+if(
+crop=="" ||
+soil=="Select Soil Type" ||
+temp=="" ||
+humidity=="" ||
+moisture=="" ||
+rainfall==""
+){
+alert("Please fill all fields.");
+return;
+}
+
+document.getElementById("resultBox").style.display="block";
+
+document.getElementById("waterAmount").innerHTML="25 Litres";
+
+document.getElementById("recommendation").innerHTML=
+"Irrigate the crop early in the morning. Based on the current soil moisture and weather conditions, approximately 25 litres of water is recommended today.";
+
+});
+
+/*
+
+Later connect Django API here.
+
+Example:
+
+POST
+
+/api/irrigation/recommend/
+
+*/
+
+</script>
+
+</body>
+</html>
